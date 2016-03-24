@@ -5,9 +5,8 @@ task default: %w[tag]
 desc "Update Version"
 task :update_version do
   dockerfile = File.read('Dockerfile')
-  dockerfile.gsub('0.12.29', FACTORIO_VERSION)
   File.open('Dockerfile', 'w') {|of|
-    of.write dockerfile
+    of.write dockerfile.gsub('0.12.29', FACTORIO_VERSION)
   }
   puts "Wrote dockerfile for version #{FACTORIO_VERSION}"
 end
