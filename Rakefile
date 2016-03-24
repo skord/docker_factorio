@@ -28,7 +28,7 @@ task :tag => :build do
 end
 
 desc "Push to docker hub and github"
-task :publish => :tag do
+task :publish => [:update_version, :build, :tag] do
   system("git push origin master --tags")
   system("docker push skord/factorio")
 end
