@@ -1,0 +1,6 @@
+factorio:
+  image: skord/factorio:latest
+  volumes:
+    - /opt/factorio/data:/opt/factorio/data
+  ports:
+    - 34197:34197
