@@ -6,13 +6,13 @@ desc "Update Version"
 task :update_version do
   dockerfile = File.read('Dockerfile')
   File.open('Dockerfile', 'w') {|of|
-    of.write dockerfile.gsub('0.12.29', FACTORIO_VERSION)
+    of.write dockerfile.gsub('TARGET_VERSION', FACTORIO_VERSION)
   }
   puts "Wrote dockerfile for version #{FACTORIO_VERSION}"
 end
 
 desc "Build skord/factorio:latest"
-task :build => :update_version do
+task :build => [:update_version] do
   system("docker build -t skord/factorio:latest .")
 end
 
