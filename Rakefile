@@ -19,11 +19,15 @@ end
 
 desc "Tag skord/factorio:latest with current factorio headless version"
 task :tag => :build do
+  system("git tag #{FACTORIO_VERSION}")
+  puts "Wrote git tag"
   system("docker tag skord/factorio:latest skord/factorio:#{FACTORIO_VERSION}")
+  puts "Wrote docker tag"
 end
 
-desc "Push to docker hub"
+desc "Push to docker hub and github"
 task :publish => :tag do
+  system("git push origin --tags")
   system("docker push skord/factorio")
 end
 
