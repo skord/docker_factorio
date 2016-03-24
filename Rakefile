@@ -19,6 +19,8 @@ end
 
 desc "Tag skord/factorio:latest with current factorio headless version"
 task :tag => :build do
+  system("git add .")
+  system("git commit -m #{FACTORIO_VERSION}")
   system("git tag #{FACTORIO_VERSION}")
   puts "Wrote git tag"
   system("docker tag skord/factorio:latest skord/factorio:#{FACTORIO_VERSION}")
