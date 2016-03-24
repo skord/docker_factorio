@@ -29,7 +29,7 @@ end
 
 desc "Push to docker hub and github"
 task :publish => :tag do
-  system("git push origin --tags")
+  system("git push origin master --tags")
   system("docker push skord/factorio")
 end
 
