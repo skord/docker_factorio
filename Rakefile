@@ -33,6 +33,6 @@ task :publish => [:update_version, :build, :tag] do
 end
 
 desc "Seed and run the server, no persistence, remove container on exit"
-task :quick_server => :tag do
-  system("docker run -it --rm -e SEED_SERVER=true --name factorio -net bridge -p 34197:34197/udp skord/factorio:#{FACTORIO_VERSION} /opt/factorio/bin/x64/factorio --start-server savegame")
+task :quick_server => :build do
+  system("docker run -it --rm -e SEED_SERVER=true --name factorio -net bridge -p 34197:34197/udp skord/factorio:latest /opt/factorio/bin/x64/factorio --start-server savegame")
 end
