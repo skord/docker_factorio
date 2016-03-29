@@ -18,11 +18,18 @@ Also I'm assuming you're going to want to use a volume mount, otherwise upgradin
 Creating the savegame and launching the server:
 
 ```
+$ docker run --name factorio -net bridge -p 80:80 -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.29
+```
+
+Upgrading is easy. Just remove the named container and bump the version. Version not actually bumped in this example.
+
+```
 $ docker stop factorio && docker rm factorio
 $ docker run --name factorio -net bridge -p 80:80 -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.29
 ```
 
-Upgrading is easy. Just bump the docker tag when I release new containers. 
+
+Just bump the docker tag when I release new containers.
 
 #### Building it on your own
 
