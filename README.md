@@ -18,17 +18,11 @@ Also I'm assuming you're going to want to use a volume mount, otherwise upgradin
 Creating the savegame and launching the server:
 
 ```
-$ docker run -e SEED_SERVER=true --name factorio -net bridge -p 80:80 -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.29
-```
-
-Upgrading to a new server version:
-
-```
 $ docker stop factorio && docker rm factorio
 $ docker run --name factorio -net bridge -p 80:80 -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.29
 ```
 
-All the above does is remove the seed argument (which would be ignored if you already had savegame.zip in your saves, you're welcome) and bumps the image version.
+Upgrading is easy. Just bump the docker tag when I release new containers. 
 
 #### Building it on your own
 
