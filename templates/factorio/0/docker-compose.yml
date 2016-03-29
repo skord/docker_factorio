@@ -21,4 +21,4 @@ factorio-data:
     - /opt/factorio/saves
   command: /bin/true
   labels:
-    io.rancher.container.start_once: true
+    io.rancher.container.start_once: "true"

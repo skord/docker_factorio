@@ -19,7 +19,7 @@ form class='ui form' action='/install' method='post'
     .card
       .content
         .header
-          - if mod["homepage"].empty?
+          - if mod["homepage"].nil?
             h1= mod["title"]
           - else
             a href=mod["homepage"]
