@@ -4,10 +4,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /opt
 RUN curl -k -L -O https://www.factorio.com/get-download/0.12.29/headless/linux64
 RUN tar xvfz linux64
-RUN mkdir -p /opt/factorio/mods
+RUN mkdir -p /opt/factorio/mods && mkdir -p /opt/factorio/saves
 RUN chown -R app:app /opt/factorio
-#WORKDIR /opt/factorio
-#VOLUME /opt/factorio/saves
 RUN rm -f /etc/service/nginx/down
 ADD facpad/Gemfile facpad/Gemfile.lock /home/app/facpad/
 WORKDIR /home/app/facpad

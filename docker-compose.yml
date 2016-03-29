@@ -2,9 +2,23 @@ factorio:
   image: skord/factorio:0.12.29
   environment:
     MODS_PATH: /opt/factorio/mods
-    FP_USERNAME: admin
-    FP_PASSWORD: password
+    FP_USERNAME: ${fp_username}
+    FP_PASSWORD: ${fp_password}
   ports:
     - 34197:34197/udp
     - 80:80
   net: bridge
+  volumes_from:
+    - factorio-data
+  labels:
+    io.rancher.sidekicks: factorio-data
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+
+factorio-data:
+  image: skord/factorio:0.12.29
+  net: none
+  volumes:
+    - /opt/factorio/saves
+  command: mkdir -p /opt/factorio/saves && chown 9999:9999 /opt/factorio/saves
+  labels:
+    io.rancher.container.start_once: true
