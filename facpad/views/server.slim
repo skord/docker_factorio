@@ -1,0 +1,18 @@
+h1 Server Status
+.ui.inverted.segment
+  = @status 
+
+a.ui.button href='/server/stop'
+  i.pause.icon
+  | Stop
+a.ui.button href='/server/start'
+  i.rocket.icon
+  | Start
+
+a.ui.button href='/server/restart'
+  i.recycle.icon
+  | Restart
+
+a.ui.button href="/savegame"
+  i.angle.double.down.icon
+  | Download Savegame

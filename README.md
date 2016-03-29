@@ -1,25 +1,31 @@
-## Factorio headless server
+## Factorio headless server.
 
 So this isn't ideal, but it works. Then again, that's true with everything. The only thing I've noticed that is weird is that the first time the thing comes up, it can take a few connection attempts to connect. There's also some weird path stuff going on with the upstream binary so for whatever reason, you need to call the entire path to the binary.
+
+This has a web interface that allows for basic server control. You'll need to set the environmental variables of FP_USERNAME and FP_PASSWORD.
+
+#### Quickstart
+
+```docker-compose up```
 
 
 #### Running the pre-built container from Docker hub
 
-You'll need a savegame in a volume or this can create one for you. This is the way the game works, not something I chose. You also have to run it in bridge mode because of the way the p2p networking works.
+You'll need a savegame in a volume or this can create one for you, it's automatic, don't worry about it. This is the way the game works, not something I chose. You also have to run it in bridge mode because of the way the p2p networking works.
 
 Also I'm assuming you're going to want to use a volume mount, otherwise upgrading this guy is awful and requires launching more containers to copy the savegame out, etc.
 
 Creating the savegame and launching the server:
 
 ```
-$ docker run -e SEED_SERVER=true --name factorio -net bridge -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.28 /opt/factorio/bin/x64/factorio --start-server savegame
+$ docker run -e SEED_SERVER=true --name factorio -net bridge -p 80:80 -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.28 /opt/factorio/bin/x64/factorio --start-server savegame
 ```
 
 Upgrading to a new server version:
 
 ```
 $ docker stop factorio && docker rm factorio
-$ docker run --name factorio -net bridge -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.29 /opt/factorio/bin/x64/factorio --start-server savegame
+$ docker run --name factorio -net bridge -p 80:80 -p 34197:34197/udp -v /opt/factorio/saves:/opt/factorio/saves skord/factorio:0.12.29 /opt/factorio/bin/x64/factorio --start-server savegame
 ```
 
 All the above does is remove the seed argument (which would be ignored if you already had savegame.zip in your saves, you're welcome) and bumps the image version.
@@ -31,3 +37,7 @@ There's a Rakefile that will build and publish this. Just change the string in t
 #### Quick server task
 
 Want to run a quick server with no persistence really quickly? Run ```rake quick_server``` for a server and then connect to the IP (localhost or whereever your docker daemon runs). You will lose all your fun game time when you Ctrl-C to quit.
+
+#### The Web UI.
+
+You can install mods by passing a URL into a form. Just go try it. Not yet implimented, getting rid of mods.

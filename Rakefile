@@ -16,6 +16,10 @@ task :build => [:update_version] do
   system("docker build -t skord/factorio:latest .")
 end
 
+task :console => [:build] do
+  system("docker run -it --rm skord/factorio:latest bash")
+end
+
 desc "Tag skord/factorio:latest with current factorio headless version"
 task :tag => :build do
   system("git add .")

@@ -1,0 +1,45 @@
+javascript:
+  $(function() {
+    return $('.ui.form').form({
+      fields: {
+        mod_url: 'url'
+      }
+    });
+  });
+
+form class='ui form' action='/install' method='post'
+  .inline.fields
+    .field
+      input type='text' name="mod_url" placeholder="URL of Mod to install"
+    .field
+      button class='ui button primary submit' type='submit' Install!
+  
+.ui.cards
+  - @mods.each do |mod|
+    .card
+      .content
+        .header
+          - if mod["homepage"].empty?
+            h1= mod["title"]
+          - else
+            a href=mod["homepage"]
+              h1= mod["title"]
+        .meta
+          | Version: 
+          = mod["version"]
+        .description
+          = mod["description"]
+
+      .extra.content
+        span
+          i.user.icon
+          = mod["author"]
+
+        / table.table.ui
+        /   thead
+        /     tr
+        /       th Dependencies
+        /   tbody
+        /     - mod['dependencies'].each do |dep|
+        /       tr
+        /         td= dep

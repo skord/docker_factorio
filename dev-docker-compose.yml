@@ -1,11 +1,9 @@
 factorio:
-  image: skord/factorio:0.12.29
+  build: .
   environment:
     MODS_PATH: /opt/factorio/mods
     FP_USERNAME: admin
     FP_PASSWORD: password
-  volumes:
-    - factoriosaves:/opt/factorio/saves
   ports:
     - 34197:34197/udp
     - 80:80
