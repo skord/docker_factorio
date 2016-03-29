@@ -31,9 +31,10 @@ task :tag => :build do
 end
 
 desc "Push to docker hub and github"
-task :publish => [:update_version, :build, :tag] do
+task :publish do
   system("git push origin master --tags")
-  system("docker push skord/factorio")
+  system("docker push skord/factorio:#{FACTORIO_VERSION}")
+  system("docker push skord/factorio:latest")
 end
 
 desc "Seed and run the server, no persistence, remove container on exit"
