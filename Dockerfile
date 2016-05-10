@@ -2,7 +2,7 @@ FROM phusion/passenger-full:0.9.18
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /opt
-RUN curl -k -L -O https://www.factorio.com/get-download/0.12.29/headless/linux64
+RUN curl -k -L -O https://www.factorio.com/get-download/0.12.33/headless/linux64
 RUN tar xvfz linux64
 RUN mkdir -p /opt/factorio/mods && mkdir -p /opt/factorio/saves
 RUN chown -R app:app /opt/factorio
